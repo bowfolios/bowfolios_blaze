@@ -1,10 +1,13 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
+/*                        LANDING ROUTE                       */
+
+export const landingPageRouteName = 'Landing_Page';
 FlowRouter.route('/', {
-  name: 'Home_Page',
+  name: landingPageRouteName,
   action() {
-    BlazeLayout.render('App_Body', { main: 'Home_Page' });
+    BlazeLayout.render('Landing_Layout');
   },
 });
 
