@@ -6,4 +6,6 @@ import './header.html';
 import './header.js';
 import './if-logged-in.html';
 import './if-logged-in.js';
+import './landing-layout.css';
+import './landing-layout.html';
 import './loading.html';
