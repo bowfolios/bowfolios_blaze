@@ -7,33 +7,15 @@ export const landingPageRouteName = 'Landing_Page';
 FlowRouter.route('/', {
   name: landingPageRouteName,
   action() {
-    BlazeLayout.render('Landing_Layout');
+    BlazeLayout.render('Landing_Layout', { main: landingPageRouteName });
   },
 });
 
-FlowRouter.route('/list', {
-  name: 'List_Stuff_Page',
+export const profilePageRouteName = 'Profile_Page';
+FlowRouter.route('/profile', {
+  name: profilePageRouteName,
   action() {
-    BlazeLayout.render('App_Body', { main: 'List_Stuff_Page' });
+    BlazeLayout.render('User_Layout', { main: profilePageRouteName });
   },
 });
 
-FlowRouter.route('/add', {
-  name: 'Add_Stuff_Page',
-  action() {
-    BlazeLayout.render('App_Body', { main: 'Add_Stuff_Page' });
-  },
-});
-
-FlowRouter.route('/stuff/:_id', {
-  name: 'Edit_Stuff_Page',
-  action() {
-    BlazeLayout.render('App_Body', { main: 'Edit_Stuff_Page' });
-  },
-});
-
-FlowRouter.notFound = {
-  action() {
-    BlazeLayout.render('App_Body', { main: 'App_Not_Found' });
-  },
-};
