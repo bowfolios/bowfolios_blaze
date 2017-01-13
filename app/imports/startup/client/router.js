@@ -1,5 +1,7 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { $ } from 'meteor/jquery';
+
 
 /*                        LANDING ROUTE                       */
 
@@ -7,33 +9,48 @@ export const landingPageRouteName = 'Landing_Page';
 FlowRouter.route('/', {
   name: landingPageRouteName,
   action() {
-    BlazeLayout.render('Landing_Layout');
+    BlazeLayout.render('Landing_Layout', { main: landingPageRouteName });
   },
 });
 
-FlowRouter.route('/list', {
-  name: 'List_Stuff_Page',
+/*                        USER ROUTE s                      */
+
+
+function addBodyClass() {
+  $('body').addClass('user-layout-body');
+}
+
+function removeBodyClass() {
+  $('body').removeClass('user-layout-body');
+}
+
+const userRoutes = FlowRouter.group({
+  prefix: '/user',
+  name: 'userRoutes',
+  triggersEnter: [addBodyClass],
+  triggersExit: [removeBodyClass],
+});
+
+export const profilePageRouteName = 'Profile_Page';
+userRoutes.route('/profile', {
+  name: profilePageRouteName,
   action() {
-    BlazeLayout.render('App_Body', { main: 'List_Stuff_Page' });
+    BlazeLayout.render('User_Layout', { main: profilePageRouteName });
   },
 });
 
-FlowRouter.route('/add', {
-  name: 'Add_Stuff_Page',
-  action() {
-    BlazeLayout.render('App_Body', { main: 'Add_Stuff_Page' });
-  },
-});
-
-FlowRouter.route('/stuff/:_id', {
-  name: 'Edit_Stuff_Page',
-  action() {
-    BlazeLayout.render('App_Body', { main: 'Edit_Stuff_Page' });
-  },
-});
-
+/*                        MISC ROUTES                       */
 FlowRouter.notFound = {
   action() {
-    BlazeLayout.render('App_Body', { main: 'App_Not_Found' });
+    BlazeLayout.render('Page_Not_Found');
   },
 };
+
+// export const profilePageRouteName = 'Profile_Page';
+// FlowRouter.route('/profile', {
+//   name: profilePageRouteName,
+//   action() {
+//     BlazeLayout.render('User_Layout', { main: profilePageRouteName });
+//   },
+// });
+

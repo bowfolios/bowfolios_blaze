@@ -1,6 +1,10 @@
 import '/imports/startup/client';
 import '/imports/startup/both';
 import '/imports/api/stuff';
-import '/imports/ui/layouts';
+import '/imports/ui/layouts/landing';
+import '/imports/ui/layouts/shared';
+import '/imports/ui/layouts/user';
 import '/imports/ui/pages';
+import '/imports/ui/pages/landing';
+import '/imports/ui/pages/user';
 import '/imports/ui/stylesheets/style.css';

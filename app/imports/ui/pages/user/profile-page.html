@@ -1,0 +1,82 @@
+<template name="Profile_Page">
+
+  <div class="ui padded text container segment">
+    <div class="ui dividing header">
+      Profile
+    </div>
+    <form class="ui equal width form">
+
+      <div class="fields">
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" name="first-name" placeholder="Philip">
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" name="last-name" placeholder="Johnson">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Address</label>
+        <input type="text" name="first-name" placeholder="1680 East-West Rd, Honolulu, HI 96822">
+      </div>
+
+      <div class="fields">
+        <div class="field">
+          <label>Phone</label>
+          <input type="text" name="first-name" placeholder="808-956-3489">
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="text" name="last-name" placeholder="johnson@hawaii.edu">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Interests</label>
+        <input type="text" name="last-name" placeholder="Software Engineering, Gamification, Renewable Energy">
+      </div>
+
+      <div class="fields">
+        <div class="field">
+          <label>GitHub</label>
+          <div class="ui left icon input">
+            <input type="text" placeholder="philipmjohnson">
+            <i class="github icon"></i>
+          </div>
+        </div>
+        <div class="field">
+          <label>Facebook</label>
+          <div class="ui left icon input">
+            <input type="text" placeholder="pj987">
+            <i class="facebook icon"></i>
+          </div>
+        </div>
+        <div class="field">
+          <label>Instagram</label>
+          <div class="ui left icon input">
+            <input type="text" placeholder="philipjohn">
+            <i class="instagram icon"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Bio</label>
+        <textarea rows="5" name="bio" placeholder="I am majoring in Information and Computer Sciences at the University of Hawaii.
+
+I am interested in software engineering and networking."></textarea>
+      </div>
+
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" tabindex="0" class="hidden">
+          <label>I agree to the <a href="#">Terms and Conditions</a></label>
+        </div>
+      </div>
+      <button class="ui primary button" type="submit">Submit</button>
+    </form>
+  </div>
+
+</template>
