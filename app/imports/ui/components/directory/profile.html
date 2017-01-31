@@ -12,13 +12,19 @@
       <div class="description">
         {{ description }}
       </div>
+      <div style="margin-top: 10px">
+        {{#each interest in interests}}
+          <a class="ui teal tag small label">{{interest}}</a>
+        {{/each}}
+      </div>
+
     </div>
     <div class="extra content">
       <div class="ui equal width grid">
-        <div class="column"><i class="big home icon"></i></div>
         <div class="column"><i class="big mail icon"></i></div>
-        <div class="column"><i class="big facebook icon"></i></div>
         <div class="column"><i class="big github icon"></i></div>
+        <div class="column"><i class="big facebook icon"></i></div>
+        <div class="column"><i class="big instagram icon"></i></div>
       </div>
     </div>
   </div>
