@@ -1,0 +1,12 @@
+<template name="Directory_Page">
+
+  <div class="ui container">
+    <div class="ui cards">
+
+      {{#each profile in profiles }}
+        {{> Directory_Profile name=profile.name picture=profile.picture title=profile.title description=profile.description }}
+      {{/each}}
+
+    </div>
+  </div>
+</template>
