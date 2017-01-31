@@ -60,18 +60,17 @@ userRoutes.route('/profile', {
   },
 });
 
+export const filterPageRouteName = 'Filter_Page';
+userRoutes.route('/filter', {
+  name: filterPageRouteName,
+  action() {
+    BlazeLayout.render('User_Layout', { main: filterPageRouteName });
+  },
+});
+
 /*                        MISC ROUTES                       */
 FlowRouter.notFound = {
   action() {
     BlazeLayout.render('Page_Not_Found');
   },
 };
-
-// export const profilePageRouteName = 'Profile_Page';
-// FlowRouter.route('/profile', {
-//   name: profilePageRouteName,
-//   action() {
-//     BlazeLayout.render('User_Layout', { main: profilePageRouteName });
-//   },
-// });
-
