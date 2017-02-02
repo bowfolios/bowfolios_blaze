@@ -13,3 +13,5 @@ import '/imports/ui/pages/filter';
 import '/imports/ui/pages/landing';
 import '/imports/ui/pages/user';
 import '/imports/ui/stylesheets/style.css';
+import '/imports/api/base';
+import '/imports/api/profile';
