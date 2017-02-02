@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "start": "meteor --settings ../config/settings.development.json",
-    "lint": "eslint ."
+    "lint": "eslint ./imports",
+    "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100"
   },
   "dependencies": {
     "babel-runtime": "^6.18.0",

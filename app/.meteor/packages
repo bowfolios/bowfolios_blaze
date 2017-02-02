@@ -46,8 +46,9 @@ less@2.7.8
 fabienb4:autoform-semantic-ui
 
 # For prototyping purposes, enable autopublish and insecure
-autopublish@1.0.7
 insecure@1.0.7
 
 
 
+erasaur:meteor-lodash
+practicalmeteor:mocha
