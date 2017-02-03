@@ -1,7 +1,8 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
+import { Interests } from '/imports/api/interest/InterestCollection';
 import { check } from 'meteor/check';
-
+import { Meteor } from 'meteor/meteor';
 
 /** @module Profile */
 
@@ -20,7 +21,7 @@ class ProfileCollection extends BaseCollection {
       lastName: { type: String },
       email: { type: SimpleSchema.RegEx.Email },
       bio: { type: String },
-      interestIDs: { type: [SimpleSchema.RegEx.Id], optional: true }, // TODO: Make required after interests implemented
+      interestIDs: { type: [SimpleSchema.RegEx.Id] },
       // Remainder are optional
       address: { type: String, optional: true },
       phone: { type: String, optional: true },
@@ -45,6 +46,7 @@ class ProfileCollection extends BaseCollection {
    *                   instagram: 'https://instagram.com/philipmjohnson' });
    * @param { Object } description Object with required keys: firstName, lastName, email, bio, interests.
    * Optional keys are: address, phone, github, facebook, instagram.
+   * Email must be unique for all users.
    * Interests is an array of defined interest names.
    * @throws { Meteor.Error } If a user with the supplied email already exists, or if email is not an email, or
    * if github, facebook, and instagram are not URLs.
@@ -55,10 +57,14 @@ class ProfileCollection extends BaseCollection {
     const checkPattern = { firstName: String, lastName: String, email: String, bio: String };
     check({ firstName, lastName, email, bio }, checkPattern);
 
+    if (this.find({ email }).count() > 0) {
+      throw new Meteor.Error(`${email} is previously defined in another Profile`);
+    }
+
     // Get Interests, throw error if any of them are not found.
-    const interestIDs = [interests];
-    return this._collection.insert({ firstName, lastName, email, bio, interestIDs, address, phone, github, facebook,
-    instagram });
+    const interestIDs = Interests.findIDs(interests);
+    return this._collection.insert({ firstName, lastName, email, bio, interestIDs, address, phone, github,
+      facebook, instagram });
   }
 
   /**
@@ -72,8 +78,7 @@ class ProfileCollection extends BaseCollection {
     const lastName = doc.lastName;
     const email = doc.email;
     const bio = doc.bio;
-    // const interests = _.map(doc.interestIDs, interestID => Interests.findSlugByID(interestID));
-    const interests = []; // TODO: implement interestIDs -> interest names.
+    const interests = Interests.findNames(doc.interestIDs);
     const address = doc.address;
     const phone = doc.phone;
     const github = doc.github;
