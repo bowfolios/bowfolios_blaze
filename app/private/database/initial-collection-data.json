@@ -1,0 +1,35 @@
+{
+  "comment": "Initial contents for the BowFolios database. For development purposes only.",
+  "collections": [
+    {
+      "name": "InterestCollection",
+      "contents": [
+        {
+          "name": "Software Engineering",
+          "description": "Tools and techniques for team-based development of high quality systems"
+        },
+        {
+          "name": "Algorithms",
+          "description": "A set of rules to be followed in computation"
+        }
+      ]
+    },
+    {
+      "name": "ProfileCollection",
+      "contents": [
+        {
+          "firstName": "Philip",
+          "lastName": "Johnson",
+          "email": "johnson@hawaii.edu",
+          "bio": "Professor of Information and Computer Sciences, University of Hawaii",
+          "interests": ["Software Engineering"],
+          "address": "1680 East-West Road, Honolulu, HI",
+          "phone": "808-956-3489",
+          "github": "philipmjohnson",
+          "facebook": "philipj",
+          "instagram": "pmj"
+        }
+      ]
+    }
+  ]
+}

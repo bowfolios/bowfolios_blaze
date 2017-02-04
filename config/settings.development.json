@@ -1,3 +1,11 @@
 {
-  "defaultAccount": {"username": "John", "password": "changeme"}
+  "public": {
+    "cas": {
+      "loginUrl": "https://cas-test.its.hawaii.edu/cas/login",
+      "serviceParam": "service",
+      "popupWidth": 810,
+      "popupHeight": 610
+    },
+    "initialDatabaseFileName": "database/initial-collection-data.json"
+  }
 }
