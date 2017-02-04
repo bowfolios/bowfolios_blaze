@@ -6,11 +6,79 @@
       "contents": [
         {
           "name": "Software Engineering",
-          "description": "Tools and techniques for team-based development of high quality systems"
+          "description": "Techniques for development of high quality systems"
         },
         {
           "name": "Algorithms",
           "description": "A set of rules to be followed in computation"
+        },
+        {
+          "name": "Mobile Networks",
+          "description": "Networks created using mobile devices."
+        },
+        {
+          "name": "Sailing",
+          "description": ""
+        },
+        {
+          "name": "Mars",
+          "description": ""
+        },
+        {
+          "name": "Imu Cooking",
+          "description": "Hawaiian practice of cooking in a pit."
+        },
+        {
+          "name": "Scuba",
+          "description": ""
+        },
+        {
+          "name": "Photography",
+          "description": ""
+        },
+        {
+          "name": "Wind surfing",
+          "description": ""
+        },
+        {
+          "name": "Psychology",
+          "description": ""
+        },
+        {
+          "name": "Motorcycling",
+          "description": ""
+        },
+        {
+          "name": "Accreditation",
+          "description": ""
+        },
+        {
+          "name": "Paddling",
+          "description": ""
+        },
+        {
+          "name": "Crossfit",
+          "description": ""
+        },
+        {
+          "name": "Cybersecurity",
+          "description": ""
+        },
+        {
+          "name": "Surfing",
+          "description": ""
+        },
+        {
+          "name": "Computer Vision",
+          "description": ""
+        },
+        {
+          "name": "Martial Arts",
+          "description": ""
+        },
+        {
+          "name": "Evolutionary Computation",
+          "description": ""
         }
       ]
     },
@@ -18,16 +86,79 @@
       "name": "ProfileCollection",
       "contents": [
         {
+          "firstName": "Lee",
+          "lastName": "Altenberg",
+          "email": "altenber@hawaii.edu",
+          "bio": "I am an Associate Professor of Information and Computer Sciences at the University of Hawaii.",
+          "interests": [
+            "Evolutionary Computation"
+          ],
+          "title": "Associate Professor, Information and Computer Sciences",
+          "picture": "/images/altenberg.jpg"
+        },
+        {
+          "firstName": "Kyungim",
+          "lastName": "Baek",
+          "email": "baek@hawaii.edu",
+          "bio": "I am an Associate Professor of Information and Computer Sciences at the University of Hawaii.",
+          "interests": [
+            "Computer Vision"
+          ],
+          "title": "Associate Professor, Information and Computer Sciences",
+          "picture": "/images/baek.jpg"
+        },
+        {
+          "firstName": "Edo",
+          "lastName": "Biagioni",
+          "email": "esb@hawaii.edu",
+          "bio": "I am an Associate Professor of Information and Computer Sciences at the University of Hawaii.",
+          "interests": [
+            "Mobile Networks",
+            "Sailing"
+          ],
+          "title": "Associate Professor, Information and Computer Sciences",
+          "picture": "/images/biagioni.jpg"
+        },
+        {
+          "firstName": "Kim",
+          "lastName": "Binsted",
+          "email": "binsted@hawaii.edu",
+          "bio": "I am an Associate Professor of Information and Computer Sciences at the University of Hawaii.",
+          "interests": [
+            "Mars",
+            "Imu Cooking"
+          ],
+          "title": "Associate Professor, Information and Computer Sciences",
+          "picture": "/images/binsted.jpg"
+        },
+        {
+          "firstName": "Henri",
+          "lastName": "Casanova",
+          "email": "henric@hawaii.edu",
+          "github": "henricasanova",
+          "bio": "I am a Professor of Information and Computer Sciences at the University of Hawaii.",
+          "interests": [
+            "Surfing",
+            "Photography"
+          ],
+          "title": "Professor, Information and Computer Sciences",
+          "picture": "/images/casanova.jpg"
+        },
+        {
           "firstName": "Philip",
           "lastName": "Johnson",
           "email": "johnson@hawaii.edu",
-          "bio": "Professor of Information and Computer Sciences, University of Hawaii",
-          "interests": ["Software Engineering"],
-          "address": "1680 East-West Road, Honolulu, HI",
-          "phone": "808-956-3489",
+          "bio": "I am a Professor of Information and Computer Sciences at the University of Hawaii.",
+          "interests": [
+            "Software Engineering",
+            "Crossfit",
+            "Paddling"
+          ],
+          "title": "Professor, Information and Computer Sciences",
+          "picture": "/images/johnson.jpg",
           "github": "philipmjohnson",
-          "facebook": "philipj",
-          "instagram": "pmj"
+          "facebook": "philipmeadowsjohnson",
+          "instagram": "philipmjohnson"
         }
       ]
     }

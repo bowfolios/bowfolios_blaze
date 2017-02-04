@@ -17,7 +17,7 @@ class InterestCollection extends BaseCollection {
   constructor() {
     super('Interest', new SimpleSchema({
       name: { type: String },
-      description: { type: String },
+      description: { type: String, optional: true },
     }));
   }
 
@@ -27,7 +27,7 @@ class InterestCollection extends BaseCollection {
    * Interests.define({ name: 'Software Engineering',
    *                    description: 'Methods for group development of large, high quality software systems' });
    * @param { Object } description Object with keys name and description.
-   * Name must be previously undefined.
+   * Name must be previously undefined. Description is optional.
    * @throws {Meteor.Error} If the interest definition includes a defined name.
    * @returns The newly created docID.
    */
@@ -41,13 +41,24 @@ class InterestCollection extends BaseCollection {
   }
 
   /**
+   * Returns the Interest name corresponding to the passed interest docID.
+   * @param interestID An interest docID.
+   * @returns { String } An interest name.
+   * @throws { Meteor.Error} If the interest docID cannot be found.
+   */
+  findName(interestID) {
+    this.assertDefined(interestID);
+    return this.findDoc(interestID).name;
+  }
+
+  /**
    * Returns a list of Interest names corresponding to the passed list of Interest docIDs.
-   * @param instanceIDs A list of Interest docIDs.
+   * @param interestIDs A list of Interest docIDs.
    * @returns { Array }
    * @throws { Meteor.Error} If any of the instanceIDs cannot be found.
    */
-  findNames(instanceIDs) {
-    return instanceIDs.map(instanceID => this.findDoc(instanceID).name);
+  findNames(interestIDs) {
+    return interestIDs.map(interestID => this.findName(interestID));
   }
 
   /**
