@@ -1,0 +1,38 @@
+<template name="Directory_Profile">
+
+  <div class="card">
+    <div class="content">
+      <img class="right floated mini ui image" src="{{ profile.picture }}">
+      <div class="header">
+        {{ profile.firstName }} {{ profile.lastName }}
+      </div>
+      <div class="meta">
+        {{ profile.title}}
+      </div>
+      <div class="description">
+        {{ profile.bio }}
+      </div>
+      <div style="margin-top: 10px">
+        {{#each interestID in profile.interestIDs}}
+          <a style="margin-bottom: 2px" class="ui teal tag small label">{{interest interestID}}</a>
+        {{/each}}
+      </div>
+
+    </div>
+    <div class="extra content">
+      <div class="ui equal width center aligned grid">
+        <div class="column"><a href="mailto:{{ profile.email}}"><i class="big mail icon"></i></a></div>
+        {{#if profile.github }}
+          <div class="column"><a href="https://github.com/{{ profile.github}}"><i class="big github icon"></i></a></div>
+        {{/if}}
+        {{#if profile.facebook }}
+          <div class="column"><a href="https://facebook.com/{{ profile.facebook}}"><i class="big facebook icon"></i></a></div>
+        {{/if}}
+        {{#if profile.instagram }}
+          <div class="column"><a href="https://instagram.com/{{ profile.instagram}}"><i class="big instagram icon"></i></a></div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+</template>

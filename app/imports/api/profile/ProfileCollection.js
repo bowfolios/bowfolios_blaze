@@ -22,9 +22,9 @@ class ProfileCollection extends BaseCollection {
       email: { type: SimpleSchema.RegEx.Email },
       bio: { type: String },
       interestIDs: { type: [SimpleSchema.RegEx.Id] },
+      title: { type: String },
+      picture: { type: SimpleSchema.RegEx.Url, optional: true },
       // Remainder are optional
-      address: { type: String, optional: true },
-      phone: { type: String, optional: true },
       github: { type: SimpleSchema.RegEx.Url, optional: true },
       facebook: { type: SimpleSchema.RegEx.Url, optional: true },
       instagram: { type: SimpleSchema.RegEx.Url, optional: true },
@@ -37,25 +37,26 @@ class ProfileCollection extends BaseCollection {
    * Profiles.define({ firstName: 'Philip',
    *                   lastName: 'Johnson',
    *                   email: 'johnson@hawaii.edu',
-   *                   bio: 'Professor, Information and Computer Sciences, University of Hawaii',
+   *                   bio: 'I have been a professor of computer science at UH since 1990.',
    *                   interests: ['application-development', 'software-engineering', 'databases'],
-   *                   address: '1680 East-West Rd. #307, Honolulu, HI 96822',
-   *                   phone: '808-387-6663',
+   *                   title: 'Professor of Information and Computer Sciences',
+   *                   picture: 'http://philipmjohnson.org/headshot.jpg',
    *                   github: 'https://github.com/philipmjohnson',
    *                   facebook: 'https://facebook.com/philipmjohnson',
    *                   instagram: 'https://instagram.com/philipmjohnson' });
-   * @param { Object } description Object with required keys: firstName, lastName, email, bio, interests.
-   * Optional keys are: address, phone, github, facebook, instagram.
+   * @param { Object } description Object with required keys: firstName, lastName, email, bio, interests, title, picture
+   * Optional keys are: github, facebook, instagram.
    * Email must be unique for all users.
    * Interests is an array of defined interest names.
    * @throws { Meteor.Error } If a user with the supplied email already exists, or if email is not an email, or
    * if github, facebook, and instagram are not URLs.
    * @returns The newly created docID.
    */
-  define({ firstName, lastName, email, bio, interests, address, phone, github, facebook, instagram }) {
+  define({ firstName, lastName, email, bio, interests, picture, title, github, facebook, instagram }) {
     // make sure required fields are OK.
-    const checkPattern = { firstName: String, lastName: String, email: String, bio: String };
-    check({ firstName, lastName, email, bio }, checkPattern);
+    const checkPattern = { firstName: String, lastName: String, email: String, bio: String, picture: String,
+      title: String };
+    check({ firstName, lastName, email, bio, picture, title }, checkPattern);
 
     if (this.find({ email }).count() > 0) {
       throw new Meteor.Error(`${email} is previously defined in another Profile`);
@@ -63,7 +64,7 @@ class ProfileCollection extends BaseCollection {
 
     // Get Interests, throw error if any of them are not found.
     const interestIDs = Interests.findIDs(interests);
-    return this._collection.insert({ firstName, lastName, email, bio, interestIDs, address, phone, github,
+    return this._collection.insert({ firstName, lastName, email, bio, interestIDs, picture, title, github,
       facebook, instagram });
   }
 
@@ -79,12 +80,12 @@ class ProfileCollection extends BaseCollection {
     const email = doc.email;
     const bio = doc.bio;
     const interests = Interests.findNames(doc.interestIDs);
-    const address = doc.address;
-    const phone = doc.phone;
+    const picture = doc.picture;
+    const title = doc.title;
     const github = doc.github;
     const facebook = doc.facebook;
     const instagram = doc.instagram;
-    return { firstName, lastName, email, bio, interests, address, phone, github, facebook, instagram };
+    return { firstName, lastName, email, bio, interests, picture, title, github, facebook, instagram };
   }
 }
 

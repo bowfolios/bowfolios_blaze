@@ -16,14 +16,14 @@ if (Meteor.isServer) {
     const firstName = 'Philip';
     const lastName = 'Johnson';
     const email = 'johnson@hawaii.edu';
-    const bio = 'Professor of Information and Computer Science, University of Hawaii';
+    const bio = 'I have been a professor of computer science at UH since 1990.';
     const interests = [interestName];
-    const address = '1680 East-West Rd. #307, Honolulu, HI 96822';
-    const phone = '808-387-6663';
+    const picture = 'http://philipmjohnson.org/headshot.jpg';
+    const title = 'Professor Computer Science';
     const github = 'http://github.com/philipjohnson';
     const facebook = 'http://github.com/philipjohnson';
     const instagram = 'http://github.com/philipjohnson';
-    const defineObject = { firstName, lastName, email, bio, interests, address, phone, github, facebook, instagram };
+    const defineObject = { firstName, lastName, email, bio, interests, picture, title, github, facebook, instagram };
 
     before(function setup() {
       removeAllEntities();
@@ -45,8 +45,8 @@ if (Meteor.isServer) {
       expect(doc.email).to.equal(email);
       expect(doc.bio).to.equal(bio);
       expect(doc.interestIDs[0]).to.equal(interestID);
-      expect(doc.address).to.equal(address);
-      expect(doc.phone).to.equal(phone);
+      expect(doc.picture).to.equal(picture);
+      expect(doc.title).to.equal(title);
       expect(doc.github).to.equal(github);
       expect(doc.facebook).to.equal(facebook);
       expect(doc.instagram).to.equal(instagram);
