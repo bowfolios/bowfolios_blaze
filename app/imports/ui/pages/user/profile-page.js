@@ -39,8 +39,7 @@ Template.Profile_Page.helpers({
   },
   interests() {
     const profile = Profiles.findDoc(FlowRouter.getParam('username'));
-    const selectedInterestIDs = profile && profile.interestIDs;
-    const selectedInterests = Interests.findNames(selectedInterestIDs);
+    const selectedInterests = profile.interests;
     return profile && _.map(Interests.findAll(),
             function makeInterestObject(interest) {
               return { label: interest.name, selected: _.contains(selectedInterests, interest.name) };
@@ -51,33 +50,34 @@ Template.Profile_Page.helpers({
 
 Template.Profile_Page.events({
   'submit .profile-data-form'(event, instance) {
+    console.log('update');
     event.preventDefault();
-    // Get name (text field)
-    const name = event.target.Name.value;
-    // Get bio (text area).
-    const bio = event.target.Bio.value;
-    // Get hobbies (checkboxes, zero to many)
-    // Get level (radio buttons, exactly one)
-    const level = event.target.Level.value;
-    // Get GPA (single selection)
-    const gpa = event.target.GPA.value;
-    // Get Majors (multiple selection)
-    const selectedMajors = _.filter(event.target.Majors.selectedOptions, (option) => option.selected);
-    const majors = _.map(selectedMajors, (option) => option.value);
+    const first = event.target.First.value;
+    const last = event.target.Last.value;
+    const username = event.target.Username.value;
+    const title = event.target.Title.value;
+    const picture = event.target.Picture.value;
+    const github = event.target.Github.value;
+    const facebook = event.target.Facebook.value;
+    const instagram = event.target.Instagram.value;
+    const bio = event.target.Instagram.value;
+    const selectedInterests = _.filter(event.target.Interests.selectedOptions, (option) => option.selected);
+    const interests = _.map(selectedInterests, (option) => option.value);
 
-    const newStudentData = { name, bio, level, gpa, majors };
+    const updatedProfileData = { first, last, username, title, picture, github, facebook, instagram, bio, interests };
+
     // Clear out any old validation errors.
     instance.context.resetValidation();
     // Invoke clean so that newStudentData reflects what will be inserted.
-    Profiles.getSchema().clean(newStudentData);
+    Profiles.getSchema().clean(updatedProfileData);
     // Determine validity.
-    instance.context.validate(newStudentData);
+    instance.context.validate(updatedProfileData);
+
     if (instance.context.isValid()) {
-      const id = Profiles.insert(newStudentData);
+      const docID = Profiles.findDoc(FlowRouter.getParam('username'))._id;
+      const id = Profiles.update(docID, { $set: updatedProfileData });
       instance.messageFlags.set(displaySuccessMessage, id);
       instance.messageFlags.set(displayErrorMessages, false);
-      instance.find('form').reset();
-      instance.$('.dropdown').dropdown('restore defaults');
     } else {
       instance.messageFlags.set(displaySuccessMessage, false);
       instance.messageFlags.set(displayErrorMessages, true);

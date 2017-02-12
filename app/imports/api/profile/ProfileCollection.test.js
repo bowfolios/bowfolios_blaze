@@ -9,10 +9,8 @@ import { removeAllEntities } from '/imports/api/base/BaseUtilities';
 
 if (Meteor.isServer) {
   describe('ProfileCollection', function testSuite() {
-    const interestName = 'software-engineering';
+    const interestName = 'Software Engineering';
     const interestDescription = 'Tools for software development';
-    let interestID = null;
-
     const firstName = 'Philip';
     const lastName = 'Johnson';
     const username = 'johnson';
@@ -28,7 +26,7 @@ if (Meteor.isServer) {
     before(function setup() {
       removeAllEntities();
       // Define a sample interest.
-      interestID = Interests.define({ name: interestName, description: interestDescription });
+      Interests.define({ name: interestName, description: interestDescription });
     });
 
     after(function teardown() {
@@ -44,7 +42,7 @@ if (Meteor.isServer) {
       expect(doc.lastName).to.equal(lastName);
       expect(doc.username).to.equal(username);
       expect(doc.bio).to.equal(bio);
-      expect(doc.interestIDs[0]).to.equal(interestID);
+      expect(doc.interests[0]).to.equal(interestName);
       expect(doc.picture).to.equal(picture);
       expect(doc.title).to.equal(title);
       expect(doc.github).to.equal(github);

@@ -2,6 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
 
 /** @module Interest */
 
@@ -78,6 +79,22 @@ class InterestCollection extends BaseCollection {
    */
   findNames(interestIDs) {
     return interestIDs.map(interestID => this.findName(interestID));
+  }
+
+  /**
+   * Throws an error if the passed name is not a defined Interest name.
+   * @param name The name of an interest.
+   */
+  assertName(name) {
+    this.findDoc(name);
+  }
+
+  /**
+   * Throws an error if the passed list of names are not all Interest names.
+   * @param names An array of (hopefully) Interest names.
+   */
+  assertNames(names) {
+    _.each(names, name => this.assertName(name));
   }
 
   /**

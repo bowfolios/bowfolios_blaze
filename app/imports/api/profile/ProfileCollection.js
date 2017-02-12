@@ -22,7 +22,7 @@ class ProfileCollection extends BaseCollection {
       firstName: { type: String, optional: true },
       lastName: { type: String, optional: true },
       bio: { type: String, optional: true },
-      interestIDs: { type: [SimpleSchema.RegEx.Id], optional: true },
+      interests: { type: [String], optional: true },
       title: { type: String, optional: true },
       picture: { type: SimpleSchema.RegEx.Url, optional: true },
       github: { type: SimpleSchema.RegEx.Url, optional: true },
@@ -38,7 +38,7 @@ class ProfileCollection extends BaseCollection {
    *                   lastName: 'Johnson',
    *                   username: 'johnson',
    *                   bio: 'I have been a professor of computer science at UH since 1990.',
-   *                   interests: ['application-development', 'software-engineering', 'databases'],
+   *                   interests: ['Application Development', 'Software Engineering', 'Databases'],
    *                   title: 'Professor of Information and Computer Sciences',
    *                   picture: 'http://philipmjohnson.org/headshot.jpg',
    *                   github: 'https://github.com/philipmjohnson',
@@ -49,7 +49,7 @@ class ProfileCollection extends BaseCollection {
    * Username must be unique for all users. It should be the UH email account.
    * Interests is an array of defined interest names.
    * @throws { Meteor.Error } If a user with the supplied username already exists, or
-   * if github, facebook, and instagram are not URLs.
+   * if one or more interests are not defined, or if github, facebook, and instagram are not URLs.
    * @returns The newly created docID.
    */
   define({ firstName, lastName, username, bio, interests, picture, title, github, facebook, instagram }) {
@@ -62,9 +62,9 @@ class ProfileCollection extends BaseCollection {
       throw new Meteor.Error(`${username} is previously defined in another Profile`);
     }
 
-    // Get Interests, throw error if any of them are not found.
-    const interestIDs = Interests.findIDs(interests);
-    return this._collection.insert({ firstName, lastName, username, bio, interestIDs, picture, title, github,
+    // Throw an error if any of the passed Interest names are not defined.
+    Interests.assertNames(interests);
+    return this._collection.insert({ firstName, lastName, username, bio, interests, picture, title, github,
       facebook, instagram });
   }
 
@@ -79,7 +79,7 @@ class ProfileCollection extends BaseCollection {
     const lastName = doc.lastName;
     const username = doc.username;
     const bio = doc.bio;
-    const interests = Interests.findNames(doc.interestIDs);
+    const interests = doc.interests;
     const picture = doc.picture;
     const title = doc.title;
     const github = doc.github;
