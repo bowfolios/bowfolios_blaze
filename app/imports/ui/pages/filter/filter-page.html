@@ -2,9 +2,9 @@
   {{#if Template.subscriptionsReady}}
     <div style="margin-top: 10px" class="ui container">
 
-      <form class="ui equal width form">
+      <form class="ui equal width form filter-data-form">
         <div class="field">
-          {{> Interests_Form_Field }}
+          {{> Select_Form_Control label="Interests" options=interests multiple=true }}
         </div>
         <button class="ui teal button" type="submit">Filter</button>
       </form>

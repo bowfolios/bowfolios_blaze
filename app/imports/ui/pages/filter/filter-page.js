@@ -6,22 +6,41 @@ import { Interests } from '/imports/api/interest/InterestCollection';
 
 /* eslint-disable no-param-reassign */
 
-const profileIDs = 'profileIDs';
+const selectedInterestsKey = 'selectedInterests';
 
 Template.Filter_Page.onCreated(function onCreated() {
   this.subscribe(Interests.getPublicationName());
   this.subscribe(Profiles.getPublicationName());
   this.messageFlags = new ReactiveDict();
-  this.messageFlags.set(profileIDs, undefined);
+  this.messageFlags.set(selectedInterestsKey, undefined);
 });
 
 Template.Filter_Page.helpers({
   profiles() {
-    // Initialize the profiles to display to all of the existing profiles.
-    if (!Template.instance().messageFlags.get(profileIDs)) {
-      Template.instance().messageFlags.set(profileIDs, _.map(Profiles.findAll(), profile => profile._id));
+    // Initialize selectedInterests to all of them if messageFlags is undefined.
+    if (!Template.instance().messageFlags.get(selectedInterestsKey)) {
+      Template.instance().messageFlags.set(selectedInterestsKey, _.map(Interests.findAll(), interest => interest.name));
     }
+    // Find all profiles with the currently selected interests.
+    const allProfiles = Profiles.findAll();
+    const selectedInterests = Template.instance().messageFlags.get(selectedInterestsKey);
+    return _.filter(allProfiles, profile => _.intersection(profile.interests, selectedInterests));
+  },
 
-    return _.map(Template.instance().messageFlags.get(profileIDs), profileID => Profiles.findDoc(profileID));
+  interests() {
+    return _.map(Interests.findAll(),
+            function makeInterestObject(interest) {
+              return { label: interest.name,
+                selected: _.contains(Template.instance().messageFlags.get(selectedInterestsKey), interest.name) };
+            });
   },
 });
+
+Template.Filter_Page.events({
+  'submit .filter-data-form'(event, instance) {
+    event.preventDefault();
+    const selectedOptions = _.filter(event.target.Interests.selectedOptions, (option) => option.selected);
+    instance.messageFlags.set(selectedInterestsKey, _.map(selectedOptions, (option) => option.value));
+  },
+});
+
