@@ -11,7 +11,6 @@
       <div class="fields">
         {{> Text_Form_Control label="First" placeholder="Philip" value=profile.firstName errorMessage=(fieldError "firstName")}}
         {{> Text_Form_Control label="Last" placeholder="Johnson" value=profile.lastName errorMessage=(fieldError "lastName")}}
-        {{> Text_Form_Control label="Username" value=profile.username placeholder="johnson" errorMessage=(fieldError "username")}}
 
       </div>
 
@@ -36,6 +35,11 @@
 
 
       <button class="ui primary button" type="submit">Submit</button>
+      {{#if displaySuccessMessage}}
+        <div class="ui success message">
+          <p>Profile data successfully updated.</p>
+        </div>
+      {{/if}}
     </form>
   </div>
 
