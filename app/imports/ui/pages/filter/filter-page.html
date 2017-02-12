@@ -9,13 +9,8 @@
         <button class="ui teal button" type="submit">Filter</button>
       </form>
 
-      <div style="margin-top: 20px" class="ui cards">
+      {{> Filter_Page_Directory profiles=profiles }}
 
-        {{#each profile in profiles }}
-          {{> Directory_Profile profile=profile }}
-        {{/each}}
-
-      </div>
     </div>
   {{/if}}
 </template>
