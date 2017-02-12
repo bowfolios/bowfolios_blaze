@@ -1,20 +1,16 @@
 <template name="Filter_Page">
+  {{#if Template.subscriptionsReady}}
+    <div style="margin-top: 10px" class="ui container">
 
-  <div style="margin-top: 10px" class="ui container">
+      <form class="ui equal width form filter-data-form">
+        <div class="field">
+          {{> Select_Form_Control label="Interests" options=interests multiple=true }}
+        </div>
+        <button class="ui teal button" type="submit">Filter</button>
+      </form>
 
-    <form class="ui equal width form">
-      <div class="field">
-        {{> Interests_Form_Field }}
-      </div>
-      <button class="ui teal button" type="submit">Filter</button>
-    </form>
-
-    <div style="margin-top: 20px" class="ui cards">
-
-      {{#each profile in profiles }}
-        {{> Directory_Profile name=profile.name picture=profile.picture title=profile.title description=profile.description interests=profile.interests }}
-      {{/each}}
+      {{> Filter_Page_Directory profiles=profiles }}
 
     </div>
-  </div>
+  {{/if}}
 </template>

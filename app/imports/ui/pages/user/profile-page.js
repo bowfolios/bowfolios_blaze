@@ -11,8 +11,8 @@ const displaySuccessMessage = 'displaySuccessMessage';
 const displayErrorMessages = 'displayErrorMessages';
 
 Template.Profile_Page.onCreated(function onCreated() {
-  this.subscribe(Interests._collectionName);
-  this.subscribe(Profiles._collectionName);
+  this.subscribe(Interests.getPublicationName());
+  this.subscribe(Profiles.getPublicationName());
   this.messageFlags = new ReactiveDict();
   this.messageFlags.set(displaySuccessMessage, false);
   this.messageFlags.set(displayErrorMessages, false);

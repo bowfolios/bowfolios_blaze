@@ -7,7 +7,6 @@ Template.Directory_Page.onCreated(function onCreated() {
 
 Template.Directory_Page.helpers({
   profiles() {
-    console.log(Profiles.find().fetch());
     return Profiles.find({}, { sort: { lastName: 1 } });
   },
 });

@@ -13,8 +13,8 @@
         {{ profile.bio }}
       </div>
       <div style="margin-top: 10px">
-        {{#each interestID in profile.interestIDs}}
-          <a style="margin-bottom: 2px" class="ui teal tag small label">{{interest interestID}}</a>
+        {{#each interest in profile.interests}}
+          <a style="margin-bottom: 2px" class="ui teal tag small label">{{interest}}</a>
         {{/each}}
       </div>
 
