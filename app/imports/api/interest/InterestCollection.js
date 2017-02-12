@@ -2,6 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import BaseCollection from '/imports/api/base/BaseCollection';
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
 
 /** @module Interest */
 
@@ -11,15 +12,32 @@ import { Meteor } from 'meteor/meteor';
  */
 class InterestCollection extends BaseCollection {
 
+
   /**
    * Creates the Interest collection.
    */
   constructor() {
     super('Interest', new SimpleSchema({
       name: { type: String },
+      slug: { type: String },
       description: { type: String, optional: true },
     }));
   }
+
+  /**
+   * Takes a string and returns a "slug" version of it with whitespace changed to dashes, etc.
+   * @param text The text to slugify.
+   * @returns {string} The slug.
+   */
+  _slugify(text) {
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
+  }
+
 
   /**
    * Defines a new Interest.
@@ -28,6 +46,7 @@ class InterestCollection extends BaseCollection {
    *                    description: 'Methods for group development of large, high quality software systems' });
    * @param { Object } description Object with keys name and description.
    * Name must be previously undefined. Description is optional.
+   * Creates a "slug" for this name and stores it in the slug field.
    * @throws {Meteor.Error} If the interest definition includes a defined name.
    * @returns The newly created docID.
    */
@@ -37,7 +56,8 @@ class InterestCollection extends BaseCollection {
     if (this.find({ name }).count() > 0) {
       throw new Meteor.Error(`${name} is previously defined in another Interest`);
     }
-    return this._collection.insert({ name, description });
+    const slug = this._slugify(name);
+    return this._collection.insert({ name, slug, description });
   }
 
   /**
@@ -59,6 +79,22 @@ class InterestCollection extends BaseCollection {
    */
   findNames(interestIDs) {
     return interestIDs.map(interestID => this.findName(interestID));
+  }
+
+  /**
+   * Throws an error if the passed name is not a defined Interest name.
+   * @param name The name of an interest.
+   */
+  assertName(name) {
+    this.findDoc(name);
+  }
+
+  /**
+   * Throws an error if the passed list of names are not all Interest names.
+   * @param names An array of (hopefully) Interest names.
+   */
+  assertNames(names) {
+    _.each(names, name => this.assertName(name));
   }
 
   /**

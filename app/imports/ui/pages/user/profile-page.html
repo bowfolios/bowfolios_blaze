@@ -1,81 +1,48 @@
 <template name="Profile_Page">
 
-  <div class="ui padded text container segment">
+{{#if Template.subscriptionsReady}}
+
+  <div class="ui text container segment">
     <div class="ui dividing header">
       Profile
     </div>
-    <form class="ui equal width form">
+    <form class="ui equal width form profile-data-form {{ successClass }} {{ errorClass }}">
 
       <div class="fields">
-        <div class="field">
-          <label>First Name</label>
-          <input type="text" name="first-name" placeholder="Philip">
-        </div>
-        <div class="field">
-          <label>Last Name</label>
-          <input type="text" name="last-name" placeholder="Johnson">
-        </div>
+        {{> Text_Form_Control label="First" placeholder="Philip" value=profile.firstName errorMessage=(fieldError "firstName")}}
+        {{> Text_Form_Control label="Last" placeholder="Johnson" value=profile.lastName errorMessage=(fieldError "lastName")}}
+
       </div>
 
       <div class="field">
-        <label>Address</label>
-        <input type="text" name="first-name" placeholder="1680 East-West Rd, Honolulu, HI 96822">
-      </div>
-
-      <div class="fields">
-        <div class="field">
-          <label>Phone</label>
-          <input type="text" name="first-name" placeholder="808-956-3489">
-        </div>
-        <div class="field">
-          <label>Email</label>
-          <input type="text" name="last-name" placeholder="johnson@hawaii.edu">
-        </div>
+        {{> Text_Form_Control label="Title" placeholder="Student" value=profile.title errorMessage=(fieldError "title")}}
+        {{> Text_Form_Control label="Picture" placeholder="http://foo.com/shot.jpg" value=profile.picture errorMessage=(fieldError "picture")}}
       </div>
 
       <div class="field">
-        {{> Interests_Form_Field }}
+        {{> Select_Form_Control label="Interests" options=interests errorMessage=(fieldError "interests") multiple=true }}
       </div>
 
       <div class="fields">
-        <div class="field">
-          <label>GitHub</label>
-          <div class="ui left icon input">
-            <input type="text" placeholder="philipmjohnson">
-            <i class="github icon"></i>
-          </div>
-        </div>
-        <div class="field">
-          <label>Facebook</label>
-          <div class="ui left icon input">
-            <input type="text" placeholder="pj987">
-            <i class="facebook icon"></i>
-          </div>
-        </div>
-        <div class="field">
-          <label>Instagram</label>
-          <div class="ui left icon input">
-            <input type="text" placeholder="philipjohn">
-            <i class="instagram icon"></i>
-          </div>
-        </div>
+
+        {{> Social_Network_Form_Control label="Github" icon="github" placeholder="pmjohnson" value=profile.github errorMessage=(fieldError "github")}}
+        {{> Social_Network_Form_Control label="Facebook" icon="facebook" placeholder="pmjohnson" value=profile.facebook errorMessage=(fieldError "facebook")}}
+        {{> Social_Network_Form_Control label="Instagram" icon="instagram" placeholder="pmjohnson" value=profile.instagram errorMessage=(fieldError "instagram")}}
+
       </div>
 
-      <div class="field">
-        <label>Bio</label>
-        <textarea rows="5" name="bio" placeholder="I am majoring in Information and Computer Sciences at the University of Hawaii.
+      {{> TextArea_Form_Control label="Bio" value=profile.bio placeholder="Short bio statement here" errorMessage=(fieldError "bio")}}
 
-I am interested in software engineering and networking."></textarea>
-      </div>
 
-      <div class="field">
-        <div class="ui checkbox">
-          <input type="checkbox" tabindex="0" class="hidden">
-          <label>I agree to the <a href="#">Terms and Conditions</a></label>
-        </div>
-      </div>
       <button class="ui primary button" type="submit">Submit</button>
+      {{#if displaySuccessMessage}}
+        <div class="ui success message">
+          <p>Profile data successfully updated.</p>
+        </div>
+      {{/if}}
     </form>
   </div>
+
+  {{/if}}
 
 </template>

@@ -36,6 +36,14 @@ class BaseCollection {
   }
 
   /**
+   * Returns the SimpleSchema instance associated with this collection.
+   * @returns {SimpleSchema} The schema.
+   */
+  getSchema() {
+    return this._schema;
+  }
+
+  /**
    * Default publication method for entities.
    * It publishes the entire collection.
    */
@@ -57,7 +65,8 @@ class BaseCollection {
 
   /**
    * A stricter form of findOne, in that it throws an exception if the entity isn't found in the collection.
-   * @param { String | Object } name Either the docID, or an object selector, or the 'name' field value.
+   * @param { String | Object } name Either the docID, or an object selector, or the 'name' field value, or the
+   * username field value.
    * @returns { Object } The document associated with name.
    * @throws { Meteor.Error } If the document cannot be found.
    */
@@ -65,6 +74,7 @@ class BaseCollection {
     const doc = (
             this._collection.findOne(name) ||
             this._collection.findOne({ name }) ||
+            this._collection.findOne({ username: name }) ||
             this._collection.findOne({ _id: name }));
     if (!doc) {
       throw new Meteor.Error(`${name} is not a defined ${this._type}`);
@@ -82,6 +92,14 @@ class BaseCollection {
   find(selector, options) {
     const theSelector = (typeof selector === 'undefined') ? {} : selector;
     return this._collection.find(theSelector, options);
+  }
+
+  /**
+   * Returns the entire collection via find().fetch().
+   * @returns [Array] A list of this collection as objects.
+   */
+  findAll() {
+    return this._collection.find().fetch();
   }
 
   /**

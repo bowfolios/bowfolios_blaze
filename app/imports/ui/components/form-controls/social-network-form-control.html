@@ -1,0 +1,33 @@
+<template name="Social_Network_Form_Control">
+  {{!
+    Implements a text field with a social network icon.
+
+    Parameters: required, label, name, id, placeholder, value, errorMessage, icon.
+      name, id, and placeholder are optional and default to label.
+      value and required are optional.
+
+    Here's an example:
+
+    <div class="required field">
+      <label>Name</label>
+      <div class="ui left icon input">
+        <input type="text" name="Name" id="Name" placeholder="Your name here">
+        <i class="github icon"></i>
+      </div>
+    </div>
+    }}
+  <div class="{{#if required}}required{{/if}} field">
+    <label>{{label}}</label>
+    <div class="field">
+      <div class="ui left icon input">
+        <input type="input"
+               name="{{#if name}}{{name}}{{else}}{{label}}{{/if}}"
+               id="{{#if id}}{{id}}{{else}}{{label}}{{/if}}"
+               placeholder="{{#if placeholder}}{{placeholder}}{{else}}{{label}}{{/if}}"
+               value="{{value}}">
+        <i class="{{icon}} icon"></i>
+      </div>
+    </div>
+    {{> Form_Error_Message errorMessage=errorMessage}}
+  </div>
+</template>
