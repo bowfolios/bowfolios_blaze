@@ -88,7 +88,7 @@
         {
           "firstName": "Lee",
           "lastName": "Altenberg",
-          "email": "altenber@hawaii.edu",
+          "username": "altenber",
           "bio": "I am an Associate Professor of Information and Computer Sciences at the University of Hawaii.",
           "interests": [
             "Evolutionary Computation"
@@ -99,7 +99,7 @@
         {
           "firstName": "Kyungim",
           "lastName": "Baek",
-          "email": "baek@hawaii.edu",
+          "username": "baek",
           "bio": "I am an Associate Professor of Information and Computer Sciences at the University of Hawaii.",
           "interests": [
             "Computer Vision"
@@ -110,7 +110,7 @@
         {
           "firstName": "Edo",
           "lastName": "Biagioni",
-          "email": "esb@hawaii.edu",
+          "username": "esb",
           "bio": "I am an Associate Professor of Information and Computer Sciences at the University of Hawaii.",
           "interests": [
             "Mobile Networks",
@@ -122,7 +122,7 @@
         {
           "firstName": "Kim",
           "lastName": "Binsted",
-          "email": "binsted@hawaii.edu",
+          "username": "binsted",
           "bio": "I am an Associate Professor of Information and Computer Sciences at the University of Hawaii.",
           "interests": [
             "Mars",
@@ -134,7 +134,7 @@
         {
           "firstName": "Henri",
           "lastName": "Casanova",
-          "email": "henric@hawaii.edu",
+          "username": "henric",
           "github": "henricasanova",
           "bio": "I am a Professor of Information and Computer Sciences at the University of Hawaii.",
           "interests": [
@@ -147,7 +147,7 @@
         {
           "firstName": "Philip",
           "lastName": "Johnson",
-          "email": "johnson@hawaii.edu",
+          "username": "johnson",
           "bio": "I am a Professor of Information and Computer Sciences at the University of Hawaii.",
           "interests": [
             "Software Engineering",

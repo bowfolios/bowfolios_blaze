@@ -36,6 +36,14 @@ class BaseCollection {
   }
 
   /**
+   * Returns the SimpleSchema instance associated with this collection.
+   * @returns {SimpleSchema} The schema.
+   */
+  getSchema() {
+    return this._schema;
+  }
+
+  /**
    * Default publication method for entities.
    * It publishes the entire collection.
    */
@@ -65,6 +73,7 @@ class BaseCollection {
     const doc = (
             this._collection.findOne(name) ||
             this._collection.findOne({ name }) ||
+            this._collection.findOne({ username: name }) ||
             this._collection.findOne({ _id: name }));
     if (!doc) {
       throw new Meteor.Error(`${name} is not a defined ${this._type}`);
@@ -82,6 +91,14 @@ class BaseCollection {
   find(selector, options) {
     const theSelector = (typeof selector === 'undefined') ? {} : selector;
     return this._collection.find(theSelector, options);
+  }
+
+  /**
+   * Returns the entire collection via find().fetch().
+   * @returns [Array] A list of this collection as objects.
+   */
+  findAll() {
+    return this._collection.find().fetch();
   }
 
   /**

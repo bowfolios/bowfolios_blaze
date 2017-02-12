@@ -15,7 +15,7 @@ if (Meteor.isServer) {
 
     const firstName = 'Philip';
     const lastName = 'Johnson';
-    const email = 'johnson@hawaii.edu';
+    const username = 'johnson';
     const bio = 'I have been a professor of computer science at UH since 1990.';
     const interests = [interestName];
     const picture = 'http://philipmjohnson.org/headshot.jpg';
@@ -23,7 +23,7 @@ if (Meteor.isServer) {
     const github = 'http://github.com/philipjohnson';
     const facebook = 'http://github.com/philipjohnson';
     const instagram = 'http://github.com/philipjohnson';
-    const defineObject = { firstName, lastName, email, bio, interests, picture, title, github, facebook, instagram };
+    const defineObject = { firstName, lastName, username, bio, interests, picture, title, github, facebook, instagram };
 
     before(function setup() {
       removeAllEntities();
@@ -42,7 +42,7 @@ if (Meteor.isServer) {
       const doc = Profiles.findDoc(docID);
       expect(doc.firstName).to.equal(firstName);
       expect(doc.lastName).to.equal(lastName);
-      expect(doc.email).to.equal(email);
+      expect(doc.username).to.equal(username);
       expect(doc.bio).to.equal(bio);
       expect(doc.interestIDs[0]).to.equal(interestID);
       expect(doc.picture).to.equal(picture);
