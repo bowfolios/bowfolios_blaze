@@ -12,32 +12,15 @@ import { _ } from 'meteor/underscore';
  */
 class InterestCollection extends BaseCollection {
 
-
   /**
    * Creates the Interest collection.
    */
   constructor() {
     super('Interest', new SimpleSchema({
       name: { type: String },
-      slug: { type: String },
       description: { type: String, optional: true },
     }));
   }
-
-  /**
-   * Takes a string and returns a "slug" version of it with whitespace changed to dashes, etc.
-   * @param text The text to slugify.
-   * @returns {string} The slug.
-   */
-  _slugify(text) {
-    return text.toString().toLowerCase()
-        .replace(/\s+/g, '-')           // Replace spaces with -
-        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-        .replace(/^-+/, '')             // Trim - from start of text
-        .replace(/-+$/, '');            // Trim - from end of text
-  }
-
 
   /**
    * Defines a new Interest.
@@ -56,8 +39,7 @@ class InterestCollection extends BaseCollection {
     if (this.find({ name }).count() > 0) {
       throw new Meteor.Error(`${name} is previously defined in another Interest`);
     }
-    const slug = this._slugify(name);
-    return this._collection.insert({ name, slug, description });
+    return this._collection.insert({ name, description });
   }
 
   /**
