@@ -5,6 +5,8 @@ import { _ } from 'meteor/underscore';
 
 /* global Assets */
 
+/* eslint-disable no-console */
+
 /**
  * Returns the definition array associated with collectionName in the restoreJSON structure.
  * @param restoreJSON The restore file contents.

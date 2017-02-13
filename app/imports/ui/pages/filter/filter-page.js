@@ -4,8 +4,6 @@ import { _ } from 'meteor/underscore';
 import { Profiles } from '/imports/api/profile/ProfileCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 
-/* eslint-disable no-param-reassign */
-
 const selectedInterestsKey = 'selectedInterests';
 
 Template.Filter_Page.onCreated(function onCreated() {
