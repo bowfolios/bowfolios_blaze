@@ -6,6 +6,10 @@ Template.Directory_Page.onCreated(function onCreated() {
 });
 
 Template.Directory_Page.helpers({
+
+  /**
+   * Returns a cursor to profiles, sorted by last name.
+   */
   profiles() {
     return Profiles.find({}, { sort: { lastName: 1 } });
   },

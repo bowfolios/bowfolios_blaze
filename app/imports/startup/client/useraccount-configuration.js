@@ -9,7 +9,6 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
  * anything on a page refresh.
  * To determine if the function is being invoked during a "true" login, we check to see that the userId is defined and
  * that the user is currently on the landing page. Only then do we redirect to the user's profile page.
- *
  */
 Accounts.onLogin(function onLogin() {
   const id = Meteor.userId();
