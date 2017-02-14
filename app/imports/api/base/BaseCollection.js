@@ -117,13 +117,14 @@ class BaseCollection {
 
   /**
    * Returns true if the passed entity is in this collection.
-   * @param { String | Object } name The docID, or an object specifying a documennt.
+   * @param { String | Object } name The docID, or an object specifying a document, or the name, or the username.
    * @returns {boolean} True if name exists in this collection.
    */
   isDefined(name) {
     return (
     !!this._collection.findOne(name) ||
     !!this._collection.findOne({ name }) ||
+    !!this._collection.findOne({ username: name }) ||
     !!this._collection.findOne({ _id: name }));
   }
 
