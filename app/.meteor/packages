@@ -19,6 +19,7 @@ ejson@1.0.13
 check@1.2.4
 standard-minifier-js@1.2.1
 shell-server@0.2.1
+reactive-dict
 
 # Collection utilities
 aldeed:collection2
@@ -32,6 +33,8 @@ sacha:spin
 # Account management
 accounts-ui@1.1.9
 accounts-password@1.3.3
+atoy40:accounts-cas
+random@1.0.10
 
 # Routing
 kadira:flow-router
@@ -45,8 +48,8 @@ juliancwirko:postcss
 less@2.7.8
 fabienb4:autoform-semantic-ui
 
-# For prototyping purposes, enable autopublish and insecure
+# For prototyping purposes, enable insecure
 insecure@1.0.7
 
+# Tests
 practicalmeteor:mocha
-reactive-dict

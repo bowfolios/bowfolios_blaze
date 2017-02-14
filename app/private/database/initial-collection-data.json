@@ -143,22 +143,6 @@
           ],
           "title": "Professor, Information and Computer Sciences",
           "picture": "/images/casanova.jpg"
-        },
-        {
-          "firstName": "Philip",
-          "lastName": "Johnson",
-          "username": "johnson",
-          "bio": "I am a Professor of Information and Computer Sciences at the University of Hawaii.",
-          "interests": [
-            "Software Engineering",
-            "Crossfit",
-            "Paddling"
-          ],
-          "title": "Professor, Information and Computer Sciences",
-          "picture": "/images/johnson.jpg",
-          "github": "philipmjohnson",
-          "facebook": "philipmeadowsjohnson",
-          "instagram": "philipmjohnson"
         }
       ]
     }
