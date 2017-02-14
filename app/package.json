@@ -4,6 +4,7 @@
   "scripts": {
     "start": "meteor --no-release-check --settings ../config/settings.development.json",
     "lint": "eslint ./imports",
+    "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r .",
     "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100"
   },
   "dependencies": {
@@ -20,7 +21,9 @@
     "eslint-config-airbnb": "^7.0.0",
     "eslint-plugin-jsx-a11y": "^0.6.2",
     "eslint-plugin-meteor": "^3.4.0",
-    "eslint-plugin-react": "^4.3.0"
+    "eslint-plugin-react": "^4.3.0",
+    "jsdoc": "^3.4.0",
+    "jsdoc-to-markdown": "^2.0.0"
   },
   "postcss": {
     "plugins": {
