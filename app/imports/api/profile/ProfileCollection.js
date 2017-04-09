@@ -3,6 +3,7 @@ import BaseCollection from '/imports/api/base/BaseCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
 
 /** @module Profile */
 
@@ -65,6 +66,12 @@ class ProfileCollection extends BaseCollection {
 
     // Throw an error if any of the passed Interest names are not defined.
     Interests.assertNames(interests);
+
+    // Throw an error if there are duplicates in the passed interest names.
+    if (interests.length !== _.uniq(interests).length) {
+      throw new Meteor.Error(`${interests} contains duplicates`);
+    }
+
     return this._collection.insert({ firstName, lastName, username, bio, interests, picture, title, github,
       facebook, instagram });
   }

@@ -58,6 +58,16 @@ if (Meteor.isServer) {
       expect(Profiles.isDefined(docID)).to.be.true;
       Profiles.removeIt(docID);
     });
+
+    it('#define (illegal interest)', function test() {
+      defineObject.interests = ['foo'];
+      expect(function foo() { Profiles.define(defineObject); }).to.throw(Error);
+    });
+
+    it('#define (duplicate interests)', function test() {
+      defineObject.interests = [interestName, interestName];
+      expect(function foo() { Profiles.define(defineObject); }).to.throw(Error);
+    });
   });
 }
 
