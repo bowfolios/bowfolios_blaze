@@ -60,13 +60,17 @@ if (Meteor.isServer) {
     });
 
     it('#define (illegal interest)', function test() {
-      defineObject.interests = ['foo'];
-      expect(function foo() { Profiles.define(defineObject); }).to.throw(Error);
+      const illegalInterests = ['foo'];
+      const defineObject2 = { firstName, lastName, username, bio, illegalInterests, picture, title,
+        github, facebook, instagram };
+      expect(function foo() { Profiles.define(defineObject2); }).to.throw(Error);
     });
 
     it('#define (duplicate interests)', function test() {
-      defineObject.interests = [interestName, interestName];
-      expect(function foo() { Profiles.define(defineObject); }).to.throw(Error);
+      const duplicateInterests = [interestName, interestName];
+      const defineObject3 = { firstName, lastName, username, bio, duplicateInterests, picture, title,
+        github, facebook, instagram };
+      expect(function foo() { Profiles.define(defineObject3); }).to.throw(Error);
     });
   });
 }
