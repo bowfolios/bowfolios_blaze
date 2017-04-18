@@ -3,6 +3,7 @@ import BaseCollection from '/imports/api/base/BaseCollection';
 import { Interests } from '/imports/api/interest/InterestCollection';
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
 
 /** @module Profile */
 
@@ -52,11 +53,15 @@ class ProfileCollection extends BaseCollection {
    * if one or more interests are not defined, or if github, facebook, and instagram are not URLs.
    * @returns The newly created docID.
    */
-  define({ firstName = '', lastName = '', username, bio = '', interests, picture = '', title = '', github = '',
-      facebook = '', instagram = '' }) {
+  define({
+      firstName = '', lastName = '', username, bio = '', interests, picture = '', title = '', github = '',
+      facebook = '', instagram = ''
+  }) {
     // make sure required fields are OK.
-    const checkPattern = { firstName: String, lastName: String, username: String, bio: String, picture: String,
-      title: String };
+    const checkPattern = {
+      firstName: String, lastName: String, username: String, bio: String, picture: String,
+      title: String
+    };
     check({ firstName, lastName, username, bio, picture, title }, checkPattern);
 
     if (this.find({ username }).count() > 0) {
@@ -65,32 +70,41 @@ class ProfileCollection extends BaseCollection {
 
     // Throw an error if any of the passed Interest names are not defined.
     Interests.assertNames(interests);
-    return this._collection.insert({ firstName, lastName, username, bio, interests, picture, title, github,
-      facebook, instagram });
+    return this._collection.insert({
+      firstName, lastName, username, bio, interests, picture, title, github,
+      facebook, instagram
+    });
+
+       if(interests.length != _.uniq(interests).length) {
+        throw new Meteor.Error( `An interest has been inserted more than once!`);
+      }
+  }
+
+    /**
+     * Returns an object representing the Profile docID in a format acceptable to define().
+     * @param docID The docID of a Profile.
+     * @returns { Object } An object representing the definition of docID.
+     */
+    dumpOne(docID)
+    {
+      const doc = this.findDoc(docID);
+      const firstName = doc.firstName;
+      const lastName = doc.lastName;
+      const username = doc.username;
+      const bio = doc.bio;
+      const interests = doc.interests;
+      const picture = doc.picture;
+      const title = doc.title;
+      const github = doc.github;
+      const facebook = doc.facebook;
+      const instagram = doc.instagram;
+      return { firstName, lastName, username, bio, interests, picture, title, github, facebook, instagram };
+    }
   }
 
   /**
-   * Returns an object representing the Profile docID in a format acceptable to define().
-   * @param docID The docID of a Profile.
-   * @returns { Object } An object representing the definition of docID.
+   * Provides the singleton instance of this class to all other entities.
    */
-  dumpOne(docID) {
-    const doc = this.findDoc(docID);
-    const firstName = doc.firstName;
-    const lastName = doc.lastName;
-    const username = doc.username;
-    const bio = doc.bio;
-    const interests = doc.interests;
-    const picture = doc.picture;
-    const title = doc.title;
-    const github = doc.github;
-    const facebook = doc.facebook;
-    const instagram = doc.instagram;
-    return { firstName, lastName, username, bio, interests, picture, title, github, facebook, instagram };
-  }
-}
-
-/**
- * Provides the singleton instance of this class to all other entities.
- */
-export const Profiles = new ProfileCollection();
+  export
+  const
+  Profiles = new ProfileCollection();
