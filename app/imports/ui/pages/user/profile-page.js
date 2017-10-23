@@ -27,11 +27,6 @@ Template.Profile_Page.helpers({
   errorClass() {
     return Template.instance().messageFlags.get(displayErrorMessages) ? 'error' : '';
   },
-  fieldError(fieldName) {
-    const invalidKeys = Template.instance().context.invalidKeys();
-    const errorObject = _.find(invalidKeys, (keyObj) => keyObj.name === fieldName);
-    return errorObject && Template.instance().context.keyErrorMessage(errorObject.name);
-  },
   profile() {
     return Profiles.findDoc(FlowRouter.getParam('username'));
   },
@@ -62,18 +57,18 @@ Template.Profile_Page.events({
     const interests = _.map(selectedInterests, (option) => option.value);
 
     const updatedProfileData = { firstName, lastName, title, picture, github, facebook, instagram, bio, interests,
-    username };
+      username };
 
     // Clear out any old validation errors.
-    instance.context.resetValidation();
+    instance.context.reset();
     // Invoke clean so that updatedProfileData reflects what will be inserted.
-    Profiles.getSchema().clean(updatedProfileData);
+    const cleanData = Profiles.getSchema().clean(updatedProfileData);
     // Determine validity.
-    instance.context.validate(updatedProfileData);
+    instance.context.validate(cleanData);
 
     if (instance.context.isValid()) {
       const docID = Profiles.findDoc(FlowRouter.getParam('username'))._id;
-      const id = Profiles.update(docID, { $set: updatedProfileData });
+      const id = Profiles.update(docID, { $set: cleanData });
       instance.messageFlags.set(displaySuccessMessage, id);
       instance.messageFlags.set(displayErrorMessages, false);
     } else {
