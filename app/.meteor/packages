@@ -49,6 +49,6 @@ less@2.7.9
 insecure@1.0.7
 
 # Tests
-practicalmeteor:mocha
 
 
+meteortesting:mocha

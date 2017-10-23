@@ -5,7 +5,7 @@
     "start": "meteor --no-release-check --settings ../config/settings.development.json",
     "lint": "eslint ./imports",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r .",
-    "test-watch": "meteor test --driver-package practicalmeteor:mocha --port 3100"
+    "test": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha"
   },
   "dependencies": {
     "babel-runtime": "^6.18.0",
