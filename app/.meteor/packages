@@ -40,15 +40,8 @@ zimme:active-route
 kadira:blaze-layout
 arillo:flow-router-helpers
 
-# Semantic UI (and packages to integrate with accounts and autoform)
-semantic:ui
-juliancwirko:postcss
-less@2.7.9
-
 # For prototyping purposes, enable insecure
 insecure@1.0.7
 
 # Tests
-
-
 meteortesting:mocha
