@@ -3,6 +3,7 @@ import BaseCollection from '/imports/api/base/BaseCollection';
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
+import { Tracker } from 'meteor/tracker';
 
 /** @module Interest */
 
@@ -19,7 +20,7 @@ class InterestCollection extends BaseCollection {
     super('Interest', new SimpleSchema({
       name: { type: String },
       description: { type: String, optional: true },
-    }));
+    }, { tracker: Tracker }));
   }
 
   /**

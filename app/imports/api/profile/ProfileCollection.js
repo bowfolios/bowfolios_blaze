@@ -4,6 +4,7 @@ import { Interests } from '/imports/api/interest/InterestCollection';
 import { check } from 'meteor/check';
 import { Meteor } from 'meteor/meteor';
 import { _ } from 'meteor/underscore';
+import { Tracker } from 'meteor/tracker';
 
 /** @module Profile */
 
@@ -30,7 +31,7 @@ class ProfileCollection extends BaseCollection {
       github: { type: SimpleSchema.RegEx.Url, optional: true },
       facebook: { type: SimpleSchema.RegEx.Url, optional: true },
       instagram: { type: SimpleSchema.RegEx.Url, optional: true },
-    }));
+    }, { tracker: Tracker }));
   }
 
   /**
