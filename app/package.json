@@ -5,7 +5,7 @@
     "start": "meteor --no-release-check --settings ../config/settings.development.json",
     "lint": "eslint ./imports",
     "jsdoc": "./node_modules/.bin/jsdoc -c ./jsdoc.json -r .",
-    "test": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha"
+    "test": "cross-env TEST_WATCH=1 meteor test --driver-package meteortesting:mocha"
   },
   "dependencies": {
     "babel-runtime": "^6.18.0",
@@ -15,6 +15,7 @@
   "devDependencies": {
     "autoprefixer": "^6.3.1",
     "chai": "*",
+    "cross-env": "^5.1.1",
     "docdash": "^0.3.0",
     "es6-enum": "^1.0.3",
     "eslint": "^3.19.0",
