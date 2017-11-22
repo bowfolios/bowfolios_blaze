@@ -18,10 +18,12 @@ if (Meteor.isServer) {
     const interests = [interestName];
     const picture = 'http://philipmjohnson.org/headshot.jpg';
     const title = 'Professor Computer Science';
+    const location = 'Honolulu, HI';
     const github = 'http://github.com/philipjohnson';
     const facebook = 'http://github.com/philipjohnson';
     const instagram = 'http://github.com/philipjohnson';
-    const defineObject = { firstName, lastName, username, bio, interests, picture, title, github, facebook, instagram };
+    const defineObject = { firstName, lastName, username, bio, interests, picture, title, github, facebook, instagram,
+      location };
 
     before(function setup() {
       removeAllEntities();
@@ -48,6 +50,7 @@ if (Meteor.isServer) {
       expect(doc.github).to.equal(github);
       expect(doc.facebook).to.equal(facebook);
       expect(doc.instagram).to.equal(instagram);
+      expect(doc.location).to.equal(location);
       // Check that multiple definitions with the same email address fail
       expect(function foo() { Profiles.define(defineObject); }).to.throw(Error);
       // Check that we can dump and restore a Profile.

@@ -27,6 +27,7 @@ class ProfileCollection extends BaseCollection {
       interests: { type: Array, optional: true },
       'interests.$': { type: String },
       title: { type: String, optional: true },
+      location: { type: String, optional: true },
       picture: { type: SimpleSchema.RegEx.Url, optional: true },
       github: { type: SimpleSchema.RegEx.Url, optional: true },
       facebook: { type: SimpleSchema.RegEx.Url, optional: true },
@@ -43,6 +44,7 @@ class ProfileCollection extends BaseCollection {
    *                   bio: 'I have been a professor of computer science at UH since 1990.',
    *                   interests: ['Application Development', 'Software Engineering', 'Databases'],
    *                   title: 'Professor of Information and Computer Sciences',
+   *                   location: 'Honolulu',
    *                   picture: 'http://philipmjohnson.org/headshot.jpg',
    *                   github: 'https://github.com/philipmjohnson',
    *                   facebook: 'https://facebook.com/philipmjohnson',
@@ -56,11 +58,11 @@ class ProfileCollection extends BaseCollection {
    * @returns The newly created docID.
    */
   define({ firstName = '', lastName = '', username, bio = '', interests = [], picture = '', title = '', github = '',
-      facebook = '', instagram = '' }) {
+      facebook = '', instagram = '', location }) {
     // make sure required fields are OK.
     const checkPattern = { firstName: String, lastName: String, username: String, bio: String, picture: String,
-      title: String };
-    check({ firstName, lastName, username, bio, picture, title }, checkPattern);
+      title: String, location: String };
+    check({ firstName, lastName, username, bio, picture, title, location }, checkPattern);
 
     if (this.find({ username }).count() > 0) {
       throw new Meteor.Error(`${username} is previously defined in another Profile`);
@@ -75,7 +77,7 @@ class ProfileCollection extends BaseCollection {
     }
 
     return this._collection.insert({ firstName, lastName, username, bio, interests, picture, title, github,
-      facebook, instagram });
+      facebook, instagram, location });
   }
 
   /**
@@ -95,7 +97,8 @@ class ProfileCollection extends BaseCollection {
     const github = doc.github;
     const facebook = doc.facebook;
     const instagram = doc.instagram;
-    return { firstName, lastName, username, bio, interests, picture, title, github, facebook, instagram };
+    const location = doc.location;
+    return { firstName, lastName, username, bio, interests, picture, title, github, facebook, instagram, location };
   }
 }
 
